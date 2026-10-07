@@ -20,11 +20,17 @@ jobs:
           java-version: 17
           cache: gradle
 
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: "${{ github.workspace }}"
+          output-file: sbom.json
+
       - name: Code vulnerability scanning
         uses: anchore/scan-action@v3
         id: scan
         with:
-          path: "${{ github.workspace }}"
+          sbom: sbom.json
           fail-build: false
           severity-cutoff: critical
           output-format: sarif
