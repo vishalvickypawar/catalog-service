@@ -3,6 +3,7 @@ on: push
 
 jobs:
   build:
+
     name: Build and Test
     runs-on: ubuntu-22.04
     permissions:
@@ -11,12 +12,14 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
+
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
           cache: gradle
+
       - name: Code vulnerability scanning
         uses: anchore/scan-action@v3
         id: scan
@@ -30,6 +33,8 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
+          checkout_path: ${{ github.workspace }}
+
       - name: Build, unit tests and integration tests
         run: |
           chmod +x gradlew
