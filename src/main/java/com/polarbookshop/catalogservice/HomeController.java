@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     private final PolarProperties polarProperties;
 
-    public HomeController(PolarProperties polarproperties) {
+    public HomeController(PolarProperties polarProperties) {
         this.polarProperties = polarProperties;
     }
 
