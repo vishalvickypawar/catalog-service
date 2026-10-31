@@ -25,3 +25,9 @@ These additional references should also help you:
 docker run -d --name polar-postgres --net catalog-network -e POSTGRES_USER=user -e POSTGRES_PASSWORD=password -e POSTGRES_DB=polardb_catalog -p 5432:5432 postgres:14.4
 
 docker rm -fv polar-postgres
+
+### Docker Command for catalog-service
+
+docker run -d --name catalog-service --net catalog-network -p 9001:9001 -e SPRING_DATASOURCE_URL=jdbc:postgresql://polar-postgres:5432/polardb_catalog -e SPRING_PROFILES_ACTIVE=testdata catalog-service
+
+docker rm -f catalog-service polar-postgres
