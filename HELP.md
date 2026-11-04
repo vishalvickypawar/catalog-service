@@ -35,3 +35,7 @@ docker run -d --name catalog-service --net catalog-network -p 9001:9001 -e SPRIN
 docker rm -f catalog-service polar-postgres
 
 docker network rm catalog-network
+
+### Publish BuildPack image to GitHub container registry
+
+./gradlew bootBuildImage --imageName ghcr.io/vishalvickypawar/catalog-service --publishImage -PregistryUrl="ghcr.io" -PregistryUsername="vishalvickypawar" -PregistryToken="<token>"
