@@ -39,3 +39,15 @@ docker network rm catalog-network
 ### Publish BuildPack image to GitHub container registry
 
 ./gradlew bootBuildImage --imageName ghcr.io/vishalvickypawar/catalog-service --publishImage -PregistryUrl="ghcr.io" -PregistryUsername="vishalvickypawar" -PregistryToken="<token>"
+
+### Load local BuildPack image into minikube
+
+./gradlew bootBuildImage
+
+minikube image load catalog-service --profile polar
+
+kubectl apply -f k8s/deployment.yml
+
+kubectl get all -l app=catalog-service
+
+kubectl logs deployment/catalog-service
